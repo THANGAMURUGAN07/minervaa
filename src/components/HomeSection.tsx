@@ -12,23 +12,10 @@ const HomeSection = () => {
   const [shouldLoadHeroVideo, setShouldLoadHeroVideo] = useState(false);
   const [videoLoadFailed, setVideoLoadFailed] = useState(false);
 
-  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-  const heroVideoPublicId = import.meta.env.VITE_HERO_VIDEO_PUBLIC_ID;
-  const fallbackMp4 = '\Video.mp4';
 
-  const cloudinaryBase =
-    cloudName && heroVideoPublicId
-      ? `https://res.cloudinary.com/${cloudName}/video/upload`
-      : '';
-
-  // Use lower quality and smaller width for faster loading
-  const heroVideoMp4 = cloudinaryBase
-    ? `${cloudinaryBase}/f_mp4,q_auto:low,vc_auto,w_720/${heroVideoPublicId}.mp4`
-    : fallbackMp4;
-
-  const heroVideoPoster = cloudinaryBase
-    ? `https://res.cloudinary.com/${cloudName}/video/upload/so_1,f_jpg,q_auto,w_1200/${heroVideoPublicId}.jpg`
-    : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%234c1d95' width='1200' height='600'/%3E%3C/svg%3E";
+  // Always use local video for fastest loading
+  const heroVideoMp4 = '/Video.mp4';
+  const heroVideoPoster = '/webp/hero_poster.webp';
 
   const groupImageSrc = HOME_GROUP_IMAGE_CLOUDINARY_URL || getPublicAssetUrl('/webp/group.webp');
 
