@@ -5,11 +5,12 @@ import { Sparkles } from 'lucide-react';
 import { getPublicAssetUrl } from '../utils/publicAsset';
 
 const HOME_GROUP_IMAGE_CLOUDINARY_URL = '/webp/group.webp';
+const HERO_VIDEO_FALLBACK_URL = 'https://res.cloudinary.com/dscbcyysb/video/upload/f_auto,q_auto/Video_jw75gz.mp4';
 
 const HomeSection = () => {
   const [showAdmissionsCard, setShowAdmissionsCard] = useState(true);
   const [cardAnim, setCardAnim] = useState('');
-  const heroVideoMp4Url = (import.meta.env.VITE_HERO_VIDEO_MP4_URL || '').trim();
+  const heroVideoMp4Url = (import.meta.env.VITE_HERO_VIDEO_MP4_URL || HERO_VIDEO_FALLBACK_URL).trim();
   const groupImageSrc = HOME_GROUP_IMAGE_CLOUDINARY_URL || getPublicAssetUrl('/webp/group.webp');
   return (
     <>
@@ -18,18 +19,16 @@ const HomeSection = () => {
           <ParticlesBackground />
           {/* Full-bleed hero video background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none bg-black">
-            {heroVideoMp4Url ? (
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source src={heroVideoMp4Url} type="video/mp4" />
-              </video>
-            ) : null}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src={heroVideoMp4Url} type="video/mp4" />
+            </video>
           </div>
 
           <div className="relative z-10 text-center px-2 md:px-4 animate-fade-in-up">
