@@ -6,11 +6,13 @@ import { getPublicAssetUrl } from '../utils/publicAsset';
 
 const HOME_GROUP_IMAGE_CLOUDINARY_URL = '/webp/group.webp';
 const HERO_VIDEO_FALLBACK_URL = 'https://res.cloudinary.com/dscbcyysb/video/upload/f_auto,q_auto/Video_jw75gz.mp4';
+const HERO_VIDEO_MOBILE_FALLBACK_URL = 'https://res.cloudinary.com/dscbcyysb/video/upload/f_auto,q_auto:low,w_720/Video_jw75gz.mp4';
 
 const HomeSection = () => {
   const [showAdmissionsCard, setShowAdmissionsCard] = useState(true);
   const [cardAnim, setCardAnim] = useState('');
   const heroVideoMp4Url = (import.meta.env.VITE_HERO_VIDEO_MP4_URL || HERO_VIDEO_FALLBACK_URL).trim();
+  const heroVideoMobileMp4Url = (import.meta.env.VITE_HERO_VIDEO_MP4_MOBILE_URL || HERO_VIDEO_MOBILE_FALLBACK_URL).trim();
   const groupImageSrc = HOME_GROUP_IMAGE_CLOUDINARY_URL || getPublicAssetUrl('/webp/group.webp');
   return (
     <>
@@ -27,6 +29,7 @@ const HomeSection = () => {
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover"
             >
+              <source src={heroVideoMobileMp4Url} media="(max-width: 768px)" type="video/mp4" />
               <source src={heroVideoMp4Url} type="video/mp4" />
             </video>
           </div>
