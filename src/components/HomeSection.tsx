@@ -9,8 +9,6 @@ const HOME_GROUP_IMAGE_CLOUDINARY_URL = '/webp/group.webp';
 const HomeSection = () => {
   const [showAdmissionsCard, setShowAdmissionsCard] = useState(true);
   const [cardAnim, setCardAnim] = useState('');
-  const [useYoutubeFallback, setUseYoutubeFallback] = useState(false);
-  const heroVideoZoom = 1.35;
   const heroVideoMp4Url = (import.meta.env.VITE_HERO_VIDEO_MP4_URL || '').trim();
   const groupImageSrc = HOME_GROUP_IMAGE_CLOUDINARY_URL || getPublicAssetUrl('/webp/group.webp');
   return (
@@ -20,7 +18,7 @@ const HomeSection = () => {
           <ParticlesBackground />
           {/* Full-bleed hero video background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none bg-black">
-            {heroVideoMp4Url && !useYoutubeFallback ? (
+            {heroVideoMp4Url ? (
               <video
                 autoPlay
                 muted
@@ -28,24 +26,14 @@ const HomeSection = () => {
                 playsInline
                 preload="auto"
                 className="absolute inset-0 w-full h-full object-cover"
-                onError={() => setUseYoutubeFallback(true)}
               >
                 <source src={heroVideoMp4Url} type="video/mp4" />
               </video>
             ) : (
-              <iframe
-                className="absolute top-1/2 left-1/2"
-                style={{
-                  width: 'max(100vw, 177.78vh)',
-                  height: 'max(100vh, 56.25vw)',
-                  transform: `translate(-50%, -50%) scale(${heroVideoZoom})`,
-                  transformOrigin: 'center center',
-                }}
-                src="https://www.youtube.com/embed/Kg8XmBxFr7k?autoplay=1&mute=1&loop=1&playlist=Kg8XmBxFr7k&controls=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&disablekb=1&vq=hd1080"
-                title="School Hero Video"
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
+              <img
+                src={getPublicAssetUrl('/webp/frontimage.webp')}
+                alt="School Hero"
+                className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
               />
             )}
