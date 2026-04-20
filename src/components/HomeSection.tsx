@@ -29,14 +29,7 @@ const HomeSection = () => {
               >
                 <source src={heroVideoMp4Url} type="video/mp4" />
               </video>
-            ) : (
-              <img
-                src={getPublicAssetUrl('/webp/frontimage.webp')}
-                alt="School Hero"
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="eager"
-              />
-            )}
+            ) : null}
           </div>
 
           <div className="relative z-10 text-center px-2 md:px-4 animate-fade-in-up">
